@@ -37,6 +37,19 @@ app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 
+// error handlers middleware
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Sorry!! something went wrong";
+
+  return res.status(errorStatus).json({
+    success: false,
+    message: errorMessage,
+    stack: err.stack,
+    status: err.status,
+  });
+});
+
 app.listen(8080, () => {
   connect();
   console.log("listening on port 8080");
