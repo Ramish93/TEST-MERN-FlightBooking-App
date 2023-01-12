@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//update route
+//update Hotel route
 router.put("/:id", async (req, res) => {
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
@@ -26,6 +26,26 @@ router.put("/:id", async (req, res) => {
       { new: true }
     );
     res.status(200).json(updatedHotel);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// delete Hotel route
+router.delete("/:id", async (req, res) => {
+  try {
+    await Hotel.findByIdAndDelete(req.params.id);
+    res.status(200).json("hotel has been deleted");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// get one Hotel route
+router.get("/:id", async (req, res) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    res.status(200).json(hotel);
   } catch (error) {
     res.status(500).json(error);
   }
