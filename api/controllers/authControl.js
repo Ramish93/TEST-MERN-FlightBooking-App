@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import User from "../models/User.js";
+import { createError } from "../utils/error.js";
 
 export const register = async (req, res, next) => {
   try {
@@ -40,6 +41,7 @@ export const login = async (req, res, next) => {
     );
 
     const { password, isAdmin, ...otherDetails } = user._doc;
+
     res
       .cookie("access_token", token, {
         httpOnly: true,
