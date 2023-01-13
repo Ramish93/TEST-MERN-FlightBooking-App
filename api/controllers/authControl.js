@@ -33,7 +33,8 @@ export const login = async (req, res, next) => {
     if (!isPasswordCorrect)
       return createError(400, "Username or Password is incorrect");
 
-    res.status(200).json(user);
+    const { password, isAdmin, ...otherDetails } = user._doc;
+    res.status(200).json({ ...otherDetails });
   } catch (error) {
     next(error);
   }
