@@ -1,3 +1,3 @@
-import {useState} from 'react';
+import { useState } from "react";
 
-const [useFetch, setUseFetch] = ([])
+const [useFetch, setUseFetch] = [];
